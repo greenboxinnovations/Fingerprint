@@ -31,7 +31,7 @@ public class FingerprintActivity extends AppCompatActivity {
 
     private KeyStore keyStore;
     // Variable used for storing the key in the Android Keystore container
-    private static final String KEY_NAME = "androidHive";
+    private static final String KEY_NAME = "greenBox";
     private Cipher cipher;
 
     @Override
@@ -56,20 +56,20 @@ public class FingerprintActivity extends AppCompatActivity {
                  * Intent intent = new Intent(this, DefaultAuthenticationActivity.class);
                  * startActivity(intent);
                  */
-                textView.setText("Your Device does not have a Fingerprint Sensor");
+                textView.setText(R.string.no_fingerprint_sensor);
             }else {
                 // Checks whether fingerprint permission is set on manifest
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-                    textView.setText("Fingerprint authentication permission not enabled");
+                    textView.setText(R.string.permission_not_enabled);
                 }else{
                     // Check whether at least one fingerprint is registered
                     if (!fingerprintManager.hasEnrolledFingerprints()) {
-                        textView.setText("Register at least one fingerprint in Settings");
+                        textView.setText(R.string.register_fingerprint);
                     }else{
                         // Checks whether lock screen security is enabled or not
                         if (keyguardManager != null) {
                             if (!keyguardManager.isKeyguardSecure()) {
-                                textView.setText("Lock screen security not enabled in Settings");
+                                textView.setText(R.string.enable_screen_security);
                             }else{
                                 generateKey();
 
